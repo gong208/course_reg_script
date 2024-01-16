@@ -33,8 +33,8 @@ driver.get("https://login.uillinois.edu/auth/SystemLogin/sm_login.fcc?TYPE=33554
 
 wait = WebDriverWait(driver, 10)
 original_window = driver.current_window_handle
-driver.find_element(By.ID, "netid").send_keys("jg57")
-driver.find_element(By.ID, "easpass").send_keys("Gong_Illinois_2713")
+driver.find_element(By.ID, "netid").send_keys("[netid]")
+driver.find_element(By.ID, "easpass").send_keys("[password]")
 driver.find_element(By.NAME , "BTN_LOGIN").click()
 driver.implicitly_wait(2)
 driver.find_element(By.LINK_TEXT , "Registration & Records").click()
