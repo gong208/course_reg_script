@@ -12,16 +12,16 @@ options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
 driver = webdriver.Chrome(options=options)
 section_open = False
-driver.get("https://courses.illinois.edu/schedule/2024/spring/CS/222")
+driver.get("https://courses.illinois.edu/schedule/2024/spring/CS/357")
 driver.refresh()
 while not section_open:
 
-    details = driver.find_element(By.ID, "section-dt").find_element(By.ID, "uid1A")
+    details = driver.find_element(By.ID, "section-dt").find_element(By.ID, "uid3A")
     for tr in details.find_elements(By.TAG_NAME, "tr"):
         if tr.find_element(By.TAG_NAME, "th").text == "Availability":
             #注意条件
-            if tr.find_element(By.TAG_NAME, "td").text != "Closed":
-                print("success")
+            if tr.find_element(By.TAG_NAME, "td").text == "Closed":
+                print("spot spoted")
                 section_open = True
             break
     if section_open :
@@ -34,7 +34,7 @@ driver.get("https://login.uillinois.edu/auth/SystemLogin/sm_login.fcc?TYPE=33554
 wait = WebDriverWait(driver, 10)
 original_window = driver.current_window_handle
 driver.find_element(By.ID, "netid").send_keys("[netid]")
-driver.find_element(By.ID, "easpass").send_keys("[password]")
+driver.find_element(By.ID, "easpass").send_keys("[pswd]")
 driver.find_element(By.NAME , "BTN_LOGIN").click()
 driver.implicitly_wait(2)
 driver.find_element(By.LINK_TEXT , "Registration & Records").click()
@@ -54,60 +54,17 @@ driver.implicitly_wait(2)
 driver.find_element(By.ID , "120241").click()
 driver.find_element(By.ID , "term-go").click()
 wait.until(EC.title_is("Registration"))
-search_subject = driver.find_element(By.ID , "s2id_autogen7")
+search_subject = driver.find_element(By.ID , "s2id_txt_subject").find_element(By.TAG_NAME, "input")
 search_subject.send_keys("Computer Science")
 driver.find_element(By.ID , "CS").click()
 search_subject = driver.find_element(By.ID , "txt_courseNumber")
-search_subject.send_keys("222")
+search_subject.send_keys("357")
 driver.find_element(By.ID , "search-go").click()
-driver.find_element(By.ID , "addSection12024171617").click()
+driver.find_element(By.ID , "addSection12024150106").click()
 # driver.implicitly_wait(10)
 # driver.find_element(By.CLASS_NAME , "schedule-class-pending").find_element(By.LINK_TEXT, "**Web Registered**").click()
 # driver.find_element(By.ID , "select2-result-label-22").click()
-for i in range(10):
+
+for i in range(5):
     driver.find_element(By.ID, "saveButton").click()
     time.sleep(1)
-# search_subject = driver.find_element(By.CLASS_NAME, "odd")
-# # 添加UA
-# chrome_options.add_argument('user-agent="MQQBrowser/26 Mozilla/5.0 (Linux; U; Android 2.3.7; zh-cn; MB200 Build/GRJ22; CyanogenMod-7) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"')
-
-# # 指定浏览器分辨率
-# chrome_options.add_argument('window-size=480, 800') 
-
-# # 谷歌文档提到需要加上这个属性来规避bug
-# chrome_options.add_argument('--disable-gpu') 
-
-#  # 隐藏滚动条, 应对一些特殊页面
-# chrome_options.add_argument('--hide-scrollbars')
-
-# # 不加载图片, 提升速度
-# chrome_options.add_argument('blink-settings=imagesEnabled=false') 
-
-# # 浏览器不提供可视化页面. linux下如果系统不支持可视化不加这条会启动失败
-# chrome_options.add_argument('--headless') 
-
-# # 以最高权限运行
-# chrome_options.add_argument('--no-sandbox')
-
-# # 手动指定使用的浏览器位置
-# chrome_options.binary_location = r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" 
-
-# #添加crx插件
-# chrome_options.add_extension('d:\crx\AdBlock_v2.17.crx') 
-
-# # 禁用JavaScript
-# chrome_options.add_argument("--disable-javascript") 
-
-# # 设置开发者模式启动，该模式下webdriver属性为正常值
-# chrome_options.add_experimental_option('excludeSwitches', ['enable-automation']) 
-
-# # 禁用浏览器弹窗
-# prefs = {  
-#     'profile.default_content_setting_values' :  {  
-#         'notifications' : 2  
-#      }  
-# }  
-# chrome_options.add_experimental_option('prefs',prefs)
-
-
-# driver=webdriver.Chrome(chrome_options=chrome_options)
