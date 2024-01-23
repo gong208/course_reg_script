@@ -21,7 +21,7 @@ while (not success):
         for tr in details.find_elements(By.TAG_NAME, "tr"):
             if tr.find_element(By.TAG_NAME, "th").text == "Availability":
                 #注意条件
-                if tr.find_element(By.TAG_NAME, "td").text == "Closed":
+                if tr.find_element(By.TAG_NAME, "td").text != "Closed":
                     print("spot spoted")
                     section_open = True
                 break
@@ -41,8 +41,12 @@ while (not success):
                 driver.close()
                 break
     driver.switch_to.window(original_window)
+
+    
     driver.find_element(By.ID, "netid").send_keys("[netid]")
     driver.find_element(By.ID, "easpass").send_keys("[pwd]")
+
+    
     driver.find_element(By.NAME , "BTN_LOGIN").click()
     driver.implicitly_wait(2)
     driver.find_element(By.LINK_TEXT , "Registration & Records").click()
